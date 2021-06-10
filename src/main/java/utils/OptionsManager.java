@@ -12,10 +12,5 @@ public class OptionsManager {
         return chromeOptions;
     }
 
-    public static OperaOptions getOperaOptions() {
-        OperaOptions operaOptions = new OperaOptions();
-        return operaOptions;
-    }
-
 }
 

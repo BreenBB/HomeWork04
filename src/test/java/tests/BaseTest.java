@@ -11,9 +11,7 @@ import org.testng.annotations.Parameters;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import pages.ComputersGeneralPage;
-import pages.HomePage;
-import pages.ProductCatalogPage;
+import pages.*;
 import utils.CapabilityFactory;
 
 public class BaseTest {
@@ -21,14 +19,14 @@ public class BaseTest {
     protected static ThreadLocal<RemoteWebDriver> driver = new ThreadLocal<>();// ThreadLocal позволяет нам хранить данные, которые будут доступны только конкретным потоком. Каждый поток будет иметь свой собственный экземпляр ThreadLocal
     private CapabilityFactory capabilityFactory = new CapabilityFactory();
 
-    private static final String MOYO_URL = "https://rozetka.com.ua";
+    private static final String URL = "https://elmir.ua/";
 
     @BeforeMethod
     @Parameters(value = {"browser"})
     public void setUp(@Optional("chrome") String browser) throws MalformedURLException {
         driver.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), capabilityFactory.getCapabilities(browser)));
         getDriver().manage().window().maximize();
-        getDriver().get(MOYO_URL);
+        getDriver().get(URL);
     }
 
     @AfterMethod
@@ -49,12 +47,19 @@ public class BaseTest {
         return new HomePage(getDriver());
     }
 
-    public ComputersGeneralPage getComputersGeneralPage() {
-        return new ComputersGeneralPage(getDriver());
+    public SearchPage getSearchPage() {
+        return new SearchPage(getDriver());
     }
 
-    public ProductCatalogPage getProductCatalogPage() {
-        return new ProductCatalogPage(getDriver());
+    public CartPage getCartPage() {
+        return new CartPage(getDriver());
     }
 
+    public IPhone11Page getIPhone11Page() {
+        return new IPhone11Page(getDriver());
+    }
+
+    public PCsPage getPCsPage() {
+        return new PCsPage(getDriver());
+    }
 }
